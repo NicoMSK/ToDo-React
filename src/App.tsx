@@ -28,10 +28,14 @@ export function App() {
     }
   };
 
+  function editTask(id: number) {
+    const searchTaskId = tasks.filter((task) => task.id === id);
+  }
+
   return (
-    <>
+    <div className="todo todo__container">
       <CreateTodo onCreateTodo={onCreateTodo} />
-      <ul>
+      <ul className="todo__list">
         {tasks.map((todo) => (
           <TodoItem
             key={todo.id}
@@ -41,6 +45,6 @@ export function App() {
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 }
