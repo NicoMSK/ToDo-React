@@ -1,0 +1,93 @@
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+
+  @media (max-width: 655px) {
+    font-size: 18px;
+  }
+}
+
+.todo__container {
+  margin: 0;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo__list {
+  padding: 10px;
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.todo__item {
+  padding: 10px;
+  display: flex;
+  gap: 15px;
+  border-bottom: 2px solid green;
+}
+
+.todo__wrapper-btn {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+
+  @media (max-width: 655px) {
+    flex-direction: column;
+  }
+}
+
+.button {
+  padding: 15px;
+  font-size: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+
+  @media (max-width: 655px) {
+    padding: 8px;
+    font-size: 18px;
+  }
+}
+
+.todo__form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+
+  @media (max-width: 655px) {
+    flex-direction: column;
+  }
+}
+
+.todo__input {
+  padding: 12px;
+  font-size: 15px;
+  min-width: 280px;
+}
+
+.todo__item-input {
+  border: none;
+}
+
+.todo__create-button {
+  padding: 15px;
+}
