@@ -1,15 +1,5 @@
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-}
-
 body {
+
   font-family: Arial, Helvetica, sans-serif;
   font-size: 25px;
 
@@ -66,6 +56,18 @@ body {
   }
 }
 
+.todo__edit-button {
+  background-color: #E3FF73;
+}
+
+.todo__create-button {
+  background-color: chartreuse;
+}
+
+.todo__delete-button {
+  background-color: rgb(213, 106, 106);
+}
+
 .todo__form {
   width: 100%;
   display: flex;
@@ -80,14 +82,30 @@ body {
 
 .todo__input {
   padding: 12px;
-  font-size: 15px;
+  font-size: inherit;
   min-width: 280px;
 }
 
-.todo__item-input {
-  border: none;
-}
+.todo__item-input {}
 
 .todo__create-button {
   padding: 15px;
+}
+
+.todo__item-input {
+  width: 100%;
+  padding: 10px;
+  font-size: inherit;
+  border: none;
+  outline: none;
+}
+
+.todo__text {
+  margin: 0;
+  padding: 10px;
+}
+
+.todo__text-error {
+  font-size: 15px;
+  color: rgb(163, 8, 8);
 }

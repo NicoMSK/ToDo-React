@@ -3,7 +3,7 @@ import { CreateTodo, type CreateTodoProps } from "./CreateTodo";
 import { TodoItem } from "./TodoItem";
 
 export function App() {
-  const [tasks, setTask] = useState([
+  const [todos, setTodos] = useState([
     {
       id: 1,
       title: "Задача 1",
@@ -24,24 +24,33 @@ export function App() {
         isComplite: false,
       };
 
-      setTask([...tasks, newTask]);
+      setTodos([...todos, newTask]);
     }
   };
 
-  function editTask(id: number) {
-    const searchTaskId = tasks.filter((task) => task.id === id);
+  function editTask(id: number, title: string) {
+    setTodos(
+      todos.filter((todo) => {
+        if (todo.id === id) {
+          todo.title = title;
+        }
+
+        return todo;
+      })
+    );
   }
 
   return (
     <div className="todo todo__container">
       <CreateTodo onCreateTodo={onCreateTodo} />
       <ul className="todo__list">
-        {tasks.map((todo) => (
+        {todos.map((todo) => (
           <TodoItem
             key={todo.id}
             id={todo.id}
             title={todo.title}
             isComplite={todo.isComplite}
+            editTask={editTask}
           />
         ))}
       </ul>
