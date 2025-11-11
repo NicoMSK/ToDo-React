@@ -6,10 +6,11 @@ type TodoItemProps = {
   title: string;
   isComplite: boolean;
   editTask: (id: number, title: string) => void;
+  deleteTask: (id: number) => void;
 };
 
 export function TodoItem(props: TodoItemProps) {
-  const { id, title, isComplite, editTask } = props;
+  const { id, title, isComplite, editTask, deleteTask } = props;
   const [editing, setEditing] = useState(false);
   const [titleMode, setTitleMode] = useState(false);
   const viewMode = { display: "block" };
@@ -74,7 +75,12 @@ export function TodoItem(props: TodoItemProps) {
         >
           {editing ? "OK" : "Редактировать"}
         </Button>
-        <Button className="todo__delete-button" type="button" taskId={id}>
+        <Button
+          className="todo__delete-button"
+          type="button"
+          taskId={id}
+          onClick={() => deleteTask(id)}
+        >
           Удалить
         </Button>
       </div>

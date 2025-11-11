@@ -9,12 +9,15 @@ body {
 }
 
 .todo__container {
-  margin: 0;
-  padding: 80px 20px;
+  margin: 80px auto;
+  padding: 30px 20px;
+  width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-radius: 15px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 
 .todo__list {
@@ -26,11 +29,20 @@ body {
   row-gap: 5px;
 }
 
+.todo__list-text {
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
 .todo__item {
+  margin-bottom: 5px;
   padding: 10px;
   display: flex;
   gap: 15px;
-  border-bottom: 2px solid green;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
 
 .todo__wrapper-btn {
@@ -84,9 +96,9 @@ body {
   padding: 12px;
   font-size: inherit;
   min-width: 280px;
+  border-radius: 20px;
 }
 
-.todo__item-input {}
 
 .todo__create-button {
   padding: 15px;
