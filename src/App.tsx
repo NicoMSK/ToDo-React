@@ -1,20 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CreateTodo, type CreateTodoProps } from "./CreateTodo";
 import { TodoItem } from "./TodoItem";
 
+type Todo = {
+  id: number;
+  title: string;
+  isComplite: boolean;
+}
+
 export function App() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: "Задача 1",
-      isComplite: false,
-    },
-    {
-      id: 2,
-      title: "Задача 2",
-      isComplite: false,
-    },
-  ]);
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    try {
+      const rawTodos = localStorage.getItem('todos');
+      return rawTodos ? JSON.parse(rawTodos) : [];
+    } catch (error) {
+      console.error('Не удалось выполнить парсинг задач из localStorage: ', error);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  }, [todos])
 
   const onCreateTodo: CreateTodoProps["onCreateTodo"] = (title: string) => {
     if (title.trim().length > 0) {

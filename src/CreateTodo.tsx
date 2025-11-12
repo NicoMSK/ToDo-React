@@ -17,8 +17,14 @@ export function CreateTodo(props: CreateTodoProps) {
   }
 
   return (
-    <form className="todo__form" onSubmit={onSubmit}>
-      <label className="todo__label">Новая задача</label>
+    <form
+      className="todo__form"
+      onSubmit={onSubmit}
+    >
+      <label
+        className="todo__label">
+        Новая задача
+      </label>
       <input
         className="todo__input"
         value={inputValue}
@@ -26,7 +32,10 @@ export function CreateTodo(props: CreateTodoProps) {
           setInputValue(e.target.value);
         }}
       />
-      <Button className="todo__create-button" type="submit">
+      <Button
+        className="todo__create-button"
+        type="submit"
+      >
         Создать
       </Button>
     </form>

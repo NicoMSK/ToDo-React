@@ -134,10 +134,4 @@ body {
   height: 25px;
   flex: 1 0 auto;
   accent-color: #C56FFF;
-
-}
-
-.todo__checkbox:checked {
-  font-weight: 700;
-  text-decoration: line-through;
 }
