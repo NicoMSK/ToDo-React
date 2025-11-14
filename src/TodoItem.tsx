@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { memo } from "react";
 import { Button } from "./Button";
+import { useTodoItem } from "./useTodoItem";
 
 type TodoItemProps = {
   id: number;
@@ -10,48 +11,15 @@ type TodoItemProps = {
   doneTask: (id: number, isComplite: boolean) => void;
 };
 
-export function TodoItem(props: TodoItemProps) {
+export const TodoItem = memo(TodoItemInner)
+export function TodoItemInner(props: TodoItemProps) {
   const { id, title, isComplite, editTask, deleteTask, doneTask } = props;
-  const [editing, setEditing] = useState(false);
-  const [titleMode, setTitleMode] = useState(false);
-  const viewMode = { display: "block" };
-  const editMode = { display: "block" };
 
-  const handleEditing = () => {
-    if (!editing) {
-      setEditing(true);
-      setTitleMode(false);
-    } else {
-      if (title.trim().length === 0) {
-        setTitleMode(true);
-        return;
-      }
-
-      setEditing(false);
-      setTitleMode(false);
-    }
-  };
-
-  const handleUpdatedDone = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      if (title.trim().length === 0) {
-        setTitleMode(true);
-        return;
-      }
-
-      setEditing(false);
-      setTitleMode(false);
-    }
-  };
-
-  if (editing) {
-    viewMode.display = "none";
-  } else {
-    editMode.display = "none";
-  }
+  const todoItemLogic = useTodoItem(title);
+  const { editing, titleError, inputRef, styles, handleEditing, handleUpdatedDone } = todoItemLogic
 
   return (
-    <li className="todo__item">
+    <>
       <input
         className="todo__checkbox"
         type="checkbox"
@@ -62,26 +30,27 @@ export function TodoItem(props: TodoItemProps) {
       <label
         className={`todo__text ${isComplite && "todo__text--checked"}`}
         htmlFor={id.toString()}
-        style={viewMode}
+        style={styles.viewMode}
       >
         {title}
       </label>
       <input
         className="todo__item-input"
+        ref={inputRef}
         type="text"
         value={title}
-        style={editMode}
-        onChange={(e) => editTask(id, e.target.value)}
+        style={styles.editMode}
+        onChange={(e) => { editTask(id, e.target.value) }}
         onKeyDown={handleUpdatedDone}
       />
-      <p className="todo__text-error">
-        {titleMode && "Поле не может быть пустым"}
-      </p>
+      {Boolean(titleError) &&
+        <p className="todo__text-error">
+          {titleError}
+        </p>}
       <div className="todo__wrapper-btn">
         <Button
           className="todo__edit-button"
           type="button"
-          taskId={id}
           onClick={handleEditing}
         >
           {editing ? "OK" : "Редактировать"}
@@ -89,12 +58,11 @@ export function TodoItem(props: TodoItemProps) {
         <Button
           className="todo__delete-button"
           type="button"
-          taskId={id}
           onClick={() => deleteTask(id)}
         >
           Удалить
         </Button>
       </div>
-    </li>
+    </>
   );
 }

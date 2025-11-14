@@ -30,36 +30,31 @@ export function App() {
         title: title,
         isComplite: false,
       };
-
       setTodos([...todos, newTask]);
     }
   };
 
   function editTask(id: number, title: string) {
-    setTodos(
-      todos.filter((todo) => {
+    setTodos(prev =>
+      prev.filter((todo) => {
         if (todo.id === id) {
           todo.title = title;
         }
-
         return todo;
       })
     );
   }
 
   function deleteTask(id: number) {
-    setTodos(todos.filter((todo) => todo.id !== id));
-    //setTodos(prev => prev.filter(todo => todo.id !== id));
-    // нужно разобрать эту срочку кода подробнее
+    setTodos(prev => prev.filter(todo => todo.id !== id));
   }
 
   function doneTask(id: number, isComplite: boolean) {
-    setTodos(
-      todos.filter((todo) => {
+    setTodos(prev =>
+      prev.filter((todo) => {
         if (todo.id === id) {
           todo.isComplite = !isComplite;
         }
-
         return todo;
       })
     );
@@ -73,15 +68,19 @@ export function App() {
           <p className="todo__list-text">⚠️ Список задач пуст 🚫</p>
         )}
         {todos.map((todo) => (
-          <TodoItem
+          <li
+            className="todo__item"
             key={todo.id}
-            id={todo.id}
-            title={todo.title}
-            isComplite={todo.isComplite}
-            editTask={editTask}
-            deleteTask={deleteTask}
-            doneTask={doneTask}
-          />
+          >
+            <TodoItem
+              id={todo.id}
+              title={todo.title}
+              isComplite={todo.isComplite}
+              editTask={editTask}
+              deleteTask={deleteTask}
+              doneTask={doneTask}
+            />
+          </li>
         ))}
       </ul>
     </div>
