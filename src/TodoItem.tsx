@@ -7,10 +7,11 @@ type TodoItemProps = {
   isComplite: boolean;
   editTask: (id: number, title: string) => void;
   deleteTask: (id: number) => void;
+  doneTask: (id: number, isComplite: boolean) => void;
 };
 
 export function TodoItem(props: TodoItemProps) {
-  const { id, title, isComplite, editTask, deleteTask } = props;
+  const { id, title, isComplite, editTask, deleteTask, doneTask } = props;
   const [editing, setEditing] = useState(false);
   const [titleMode, setTitleMode] = useState(false);
   const viewMode = { display: "block" };
@@ -51,10 +52,20 @@ export function TodoItem(props: TodoItemProps) {
 
   return (
     <li className="todo__item">
-      <input type="checkbox" checked={isComplite} />
-      <p className="todo__text" style={viewMode}>
+      <input
+        className="todo__checkbox"
+        type="checkbox"
+        id={id.toString()}
+        checked={isComplite}
+        onChange={() => doneTask(id, isComplite)}
+      />
+      <label
+        className={`todo__text ${isComplite && "todo__text--checked"}`}
+        htmlFor={id.toString()}
+        style={viewMode}
+      >
         {title}
-      </p>
+      </label>
       <input
         className="todo__item-input"
         type="text"

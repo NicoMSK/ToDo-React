@@ -46,12 +46,24 @@ export function App() {
     // нужно разобрать эту срочку кода подробнее
   }
 
+  function doneTask(id: number, isComplite: boolean) {
+    setTodos(
+      todos.filter((todo) => {
+        if (todo.id === id) {
+          todo.isComplite = !isComplite;
+        }
+
+        return todo;
+      })
+    );
+  }
+
   return (
     <div className="todo todo__container">
       <CreateTodo onCreateTodo={onCreateTodo} />
       <ul className="todo__list">
         {todos.length === 0 && (
-          <p className="todo__list-text">Список задач пуст :(</p>
+          <p className="todo__list-text">⚠️ Список задач пуст 🚫</p>
         )}
         {todos.map((todo) => (
           <TodoItem
@@ -61,6 +73,7 @@ export function App() {
             isComplite={todo.isComplite}
             editTask={editTask}
             deleteTask={deleteTask}
+            doneTask={doneTask}
           />
         ))}
       </ul>
