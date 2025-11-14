@@ -40,10 +40,19 @@ export function App() {
     );
   }
 
+  function deleteTask(id: number) {
+    setTodos(todos.filter((todo) => todo.id !== id));
+    //setTodos(prev => prev.filter(todo => todo.id !== id));
+    // нужно разобрать эту срочку кода подробнее
+  }
+
   return (
     <div className="todo todo__container">
       <CreateTodo onCreateTodo={onCreateTodo} />
       <ul className="todo__list">
+        {todos.length === 0 && (
+          <p className="todo__list-text">Список задач пуст :(</p>
+        )}
         {todos.map((todo) => (
           <TodoItem
             key={todo.id}
@@ -51,6 +60,7 @@ export function App() {
             title={todo.title}
             isComplite={todo.isComplite}
             editTask={editTask}
+            deleteTask={deleteTask}
           />
         ))}
       </ul>
